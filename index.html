@@ -1,103 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Utumishi Tech | Home</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .bg-logo {
-      background-image: url('images/logo.jpg');
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      opacity: 0.2;
-      position: fixed;   
-      inset: 0;
-      z-index: -1;  
-      pointer-events: none;
-    }
-  </style>
-</head>
-<body class="bg-gray-900 text-gray-100 font-sans relative overflow-x-hidden">
-
-  <!-- Background logo -->
-  <div class="bg-logo"></div>
-
-  <!-- Navbar -->
-  <nav class="bg-gray-800 shadow-md p-4 flex justify-between items-center relative z-10">
-    <a href="index.html" class="flex items-center gap-2">
-      <img src="images/logo.jpg" alt="Utumishi Tech Logo" class="h-10 w-10 object-contain bg-white p-1 rounded-full shadow" />
-      <span class="text-2xl font-bold text-indigo-400">Utumishi Tech</span>
-    </a>
-
-    <ul class="hidden md:flex gap-6 text-gray-300">
-      <li><a href="services.html" class="hover:text-white">Services</a></li>
-      <li><a href="portfolio.html" class="hover:text-white">Portfolio</a></li>
-      <li><a href="about.html" class="hover:text-white">About</a></li>
-      <li><a href="contact.html" class="hover:text-white">Contact</a></li>
-    </ul>
-
-    <a href="contact.html" class="hidden md:inline bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Get a Quote</a>
-
-    <div class="md:hidden">
-      <button id="menu-toggle" class="text-gray-300 focus:outline-none">☰</button>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="md:hidden hidden px-6 py-4 bg-gray-800 relative z-10">
-    <a href="services.html" class="block py-2 text-gray-300 hover:text-white">Services</a>
-    <a href="portfolio.html" class="block py-2 text-gray-300 hover:text-white">Portfolio</a>
-    <a href="about.html" class="block py-2 text-gray-300 hover:text-white">About</a>
-    <a href="contact.html" class="block py-2 text-gray-300 hover:text-white">Contact</a>
-    <a href="contact.html" class="block py-2 mt-2 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded">Get a Quote</a>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="text-center py-24 px-6 relative z-10">
-    <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-300 mb-6 leading-tight">
-      Digital Innovation for African Enterprises
-    </h1>
-    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-      We deliver smart software solutions, digital platforms, and expert IT consulting tailored for tomorrow’s needs.
-    </p>
-    <a href="services.html" class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded text-lg">Explore Our Services</a>
-  </section>
-
-  <!-- Features Section -->
-  <section class="bg-gray-800 py-16 px-6 relative z-10">
-    <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-3">
-      <div class="text-center">
-        <div class="text-indigo-400 text-4xl mb-4">💡</div>
-        <h3 class="text-xl font-semibold mb-2">Innovative Solutions</h3>
-        <p class="text-gray-400 text-sm">We design future-ready tech products that solve real business challenges.</p>
-      </div>
-      <div class="text-center">
-        <div class="text-indigo-400 text-4xl mb-4">⚙️</div>
-        <h3 class="text-xl font-semibold mb-2">Custom Development</h3>
-        <p class="text-gray-400 text-sm">Tailored apps and platforms that align with your unique goals and operations.</p>
-      </div>
-      <div class="text-center">
-        <div class="text-indigo-400 text-4xl mb-4">🌐</div>
-        <h3 class="text-xl font-semibold mb-2">Digital Transformation</h3>
-        <p class="text-gray-400 text-sm">Helping businesses shift to modern digital ecosystems that drive growth.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="text-center text-gray-500 text-sm py-6 border-t border-gray-700 relative z-10">
-    © 2025 Utumishi Tech Solutions. All rights reserved.
-  </footer>
-
-  <!-- Script -->
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>temp-react</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
