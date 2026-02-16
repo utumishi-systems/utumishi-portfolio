@@ -16,43 +16,53 @@ const Navbar = () => {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <nav className="bg-gray-800 shadow-md p-4 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <Link to="/" className="flex items-center gap-2">
-                    <img
-                        src="/images/logo.jpg"
-                        alt="Utumishi Tech Logo"
-                        className="h-10 w-10 object-contain bg-white p-1 rounded-full shadow"
-                    />
-                    <span className="text-2xl font-bold text-indigo-400">Utumishi Tech</span>
+        <nav className="bg-white/70 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-100/50">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+                <Link to="/" className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200">
+                        <span className="text-white text-xl">🚀</span>
+                    </div>
+                    <span className="text-xl font-bold tracking-tight text-slate-900">
+                        Utumishi<span className="text-indigo-600">Tech</span>
+                    </span>
                 </Link>
 
                 {/* Desktop Menu */}
-                <ul className="hidden md:flex gap-6 text-gray-300">
-                    {navLinks.map((link) => (
-                        <li key={link.name}>
-                            <Link
-                                to={link.path}
-                                className={`transition-colors hover:text-white ${isActive(link.path) ? 'text-indigo-400 font-semibold' : ''}`}
-                            >
-                                {link.name}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                <div className="hidden md:flex items-center gap-8">
+                    <ul className="flex gap-8 text-[15px] font-semibold text-slate-600">
+                        {navLinks.map((link) => (
+                            <li key={link.name}>
+                                <Link
+                                    to={link.path}
+                                    className={`transition-all hover:text-indigo-600 ${isActive(link.path) ? 'text-indigo-600' : ''}`}
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
 
-                <Link
-                    to="/contact"
-                    className="hidden md:inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded transition-colors"
-                >
-                    Get a Quote
-                </Link>
+                    <div className="flex items-center gap-6 ml-4">
+                        <button className="p-2 text-slate-500 hover:text-indigo-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+                        </button>
+                        <Link
+                            to="/contact"
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-indigo-100/50 hover:shadow-indigo-200"
+                        >
+                            Get a Quote
+                        </Link>
+                    </div>
+                </div>
 
                 {/* Mobile menu button */}
-                <div className="md:hidden">
+                <div className="md:hidden flex items-center gap-4">
+                    <button className="p-2 text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+                    </button>
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="text-gray-300 focus:outline-none"
+                        className="text-slate-600"
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
@@ -61,13 +71,13 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden mt-4 space-y-2 pb-2">
+                <div className="md:hidden bg-white border-b border-slate-100 py-6 px-6 space-y-4 shadow-xl">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             to={link.path}
                             onClick={() => setIsOpen(false)}
-                            className={`block py-2 px-4 text-gray-300 hover:bg-gray-700 hover:text-white rounded ${isActive(link.path) ? 'bg-gray-700 text-white' : ''}`}
+                            className={`block text-lg font-semibold ${isActive(link.path) ? 'text-indigo-600' : 'text-slate-600'}`}
                         >
                             {link.name}
                         </Link>
@@ -75,7 +85,7 @@ const Navbar = () => {
                     <Link
                         to="/contact"
                         onClick={() => setIsOpen(false)}
-                        className="block py-2 mx-4 mt-2 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded"
+                        className="block w-full py-4 bg-indigo-600 text-white text-center rounded-2xl font-bold shadow-lg"
                     >
                         Get a Quote
                     </Link>
