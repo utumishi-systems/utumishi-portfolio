@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
+import './Navbar.css';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -101,9 +102,10 @@ const Navbar = () => {
                                 key={link.name}
                                 href={link.hash}
                                 onClick={(e) => handleNavClick(e, link.hash)}
-                                className={`text-sm font-medium hover:text-[#E31E24] transition-colors ${activeSection === link.hash.substring(1) ? 'text-[#E31E24]' : darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                                className={`nav-link relative text-sm font-medium group ${activeSection === link.hash.substring(1) ? 'text-[#E31E24]' : darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                             >
                                 {link.name}
+                                <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-[#E31E24] transition-all duration-300 ${activeSection === link.hash.substring(1) ? 'w-full' : 'w-0'} group-hover:w-full`}></span>
                             </a>
                         ))}
                     </nav>

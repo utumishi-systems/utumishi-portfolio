@@ -54,10 +54,7 @@ const Footer = () => {
                     <div className="grid md:grid-cols-4 gap-8 mb-12">
                         {/* Company Bio/Logo */}
                         <div>
-                            <div className="flex items-center gap-2 mb-4">
-                                <img src="/images/utumishi-logo.svg" alt="Utumishi Tech" className="w-8 h-8" />
-                                <h3 className="text-xl font-bold">UTUMISHI TECH</h3>
-                            </div>
+                            <h3 className="text-xl font-bold mb-4">UTUMISHI TECH</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
                                 A software engineering startup delivering custom technology solutions that drive business growth and innovation.
                             </p>

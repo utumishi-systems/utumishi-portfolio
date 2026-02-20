@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Smartphone, Globe, Zap, ArrowUp } from 'lucide-react';
+import CountUp from '../components/CountUp';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 const Home = () => {
     const [showBackToTop, setShowBackToTop] = useState(false);
@@ -81,10 +83,7 @@ const Home = () => {
 
                     {/* Stats Bar */}
                     <div className={`mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 ${darkMode ? 'bg-gray-800/50' : 'bg-gray-50'} rounded-xl p-8 backdrop-blur-sm animate-fade-in-up`} style={{ animationDelay: '0.2s' }}>
-                        <div className="text-center transform transition-all duration-300 hover:scale-105">
-                            <div className={`text-3xl md:text-4xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'} transition-colors duration-300`}>10 Years</div>
-                            <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Experience</div>
-                        </div>
+                        <CountUp end={10} duration={2} darkMode={darkMode} suffix=" Years" />
                         <div className="text-center transform transition-all duration-300 hover:scale-105">
                             <div className={`text-3xl md:text-4xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'} transition-colors duration-300`}>500+</div>
                             <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects Completed</div>
@@ -113,52 +112,31 @@ const Home = () => {
                     </p>
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Service Card 1 */}
-                        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 flex flex-col`}>
-                            <div className="w-16 h-16 bg-[#E31E24] rounded-full flex items-center justify-center mb-6">
-                                <Smartphone className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                Mobile App Development
-                            </h3>
-                            <p className={`mb-6 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                Custom mobile applications for iOS and Android platforms, designed to enhance user engagement and business efficiency.
-                            </p>
-                            <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
-                                Learn More →
-                            </button>
-                        </div>
+                        <ServiceCard 
+                            icon={<Smartphone className="w-8 h-8 text-white" />}
+                            title="Mobile App Development"
+                            description="Custom mobile applications for iOS and Android platforms, designed to enhance user engagement and business efficiency."
+                            darkMode={darkMode}
+                            delay={0}
+                        />
 
                         {/* Service Card 2 */}
-                        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col animate-scale-in`} style={{ animationDelay: '0.2s' }}>
-                            <div className="w-16 h-16 bg-[#E31E24] rounded-full flex items-center justify-center mb-6 transform transition-transform duration-300 hover:scale-110 hover:rotate-6">
-                                <Globe className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                Web Development
-                            </h3>
-                            <p className={`mb-6 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                Responsive and dynamic websites that provide seamless user experiences across all devices and platforms.
-                            </p>
-                            <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
-                                Learn More →
-                            </button>
-                        </div>
+                        <ServiceCard 
+                            icon={<Globe className="w-8 h-8 text-white" />}
+                            title="Web Development"
+                            description="Responsive and dynamic websites that provide seamless user experiences across all devices and platforms."
+                            darkMode={darkMode}
+                            delay={0.1}
+                        />
 
                         {/* Service Card 3 */}
-                        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col animate-scale-in`} style={{ animationDelay: '0.3s' }}>
-                            <div className="w-16 h-16 bg-[#E31E24] rounded-full flex items-center justify-center mb-6 transform transition-transform duration-300 hover:scale-110 hover:rotate-6">
-                                <Zap className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                Business Process Automation
-                            </h3>
-                            <p className={`mb-6 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                Streamline your operations with custom automation solutions that reduce manual work and increase efficiency.
-                            </p>
-                            <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
-                                Learn More →
-                            </button>
-                        </div>
+                        <ServiceCard 
+                            icon={<Zap className="w-8 h-8 text-white" />}
+                            title="Business Process Automation"
+                            description="Streamline your operations with custom automation solutions that reduce manual work and increase efficiency."
+                            darkMode={darkMode}
+                            delay={0.2}
+                        />
                     </div>
                 </div>
             </section>
@@ -179,53 +157,22 @@ const Home = () => {
                     </p>
                     <div className="grid md:grid-cols-2 gap-8">
                         {/* Product Card 1: aSoft Overwatch */}
-                        <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col animate-scale-in`} style={{ animationDelay: '0.1s' }}>
-                            <div className={`aspect-video ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center relative`}>
-                                <div className="text-center">
-                                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>aSoft: Overwatch</div>
-                                </div>
-                            </div>
-                            <div className="p-6 flex flex-col flex-grow">
-                                <div className="flex gap-2 mb-4">
-                                    <span className="inline-block bg-[#E31E24] text-white text-xs px-3 py-1 rounded-full font-semibold">Mobile App</span>
-                                    <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Business</span>
-                                    <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Management</span>
-                                </div>
-                                <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                    aSoft: Overwatch
-                                </h3>
-                                <p className={`mb-4 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                    A comprehensive mobile application for business monitoring and management, providing real-time insights and control.
-                                </p>
-                                <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
-                                    View Project →
-                                </button>
-                            </div>
-                        </div>
+                        <ProductCard 
+                            title="aSoft: Overwatch"
+                            description="A comprehensive mobile application for business monitoring and management, providing real-time insights and control."
+                            tags={['Mobile App', 'Business', 'Management']}
+                            darkMode={darkMode}
+                            delay={0.1}
+                        />
 
                         {/* Product Card 2: Academia */}
-                        <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col animate-scale-in`} style={{ animationDelay: '0.2s' }}>
-                            <div className={`aspect-video ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center relative`}>
-                                <div className="text-center">
-                                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Academia</div>
-                                </div>
-                            </div>
-                            <div className="p-6 flex flex-col flex-grow">
-                                <div className="flex gap-2 mb-4">
-                                    <span className="inline-block bg-[#E31E24] text-white text-xs px-3 py-1 rounded-full font-semibold">Education</span>
-                                    <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Management System</span>
-                                </div>
-                                <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                    Academia
-                                </h3>
-                                <p className={`mb-4 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                    An integrated school management system that streamlines administrative tasks and enhances communication between stakeholders.
-                                </p>
-                                <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
-                                    View Project →
-                                </button>
-                            </div>
-                        </div>
+                        <ProductCard 
+                            title="Academia"
+                            description="An integrated school management system that streamlines administrative tasks and enhances communication between stakeholders."
+                            tags={['Education', 'Management System']}
+                            darkMode={darkMode}
+                            delay={0.2}
+                        />
                     </div>
                 </div>
             </section>
@@ -406,6 +353,76 @@ const Home = () => {
                     <ArrowUp className="w-5 h-5" />
                 </button>
             )}
+        </div>
+    );
+};
+
+const ServiceCard = ({ icon, title, description, darkMode, delay }) => {
+    const { ref, isVisible } = useScrollReveal();
+
+    return (
+        <div 
+            ref={ref}
+            className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 flex flex-col
+            ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{
+                transition: `all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay * 0.2}s`
+            }}
+        >
+            <div className="w-16 h-16 bg-[#E31E24] rounded-full flex items-center justify-center mb-6 transform transition-transform duration-300 hover:scale-110 hover:rotate-6">
+                {icon}
+            </div>
+            <h3 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                {title}
+            </h3>
+            <p className={`mb-6 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                {description}
+            </p>
+            <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
+                Learn More →
+            </button>
+        </div>
+    );
+};
+
+const ProductCard = ({ title, description, tags, darkMode, delay }) => {
+    const { ref, isVisible } = useScrollReveal();
+
+    return (
+        <div 
+            ref={ref}
+            className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform flex flex-col
+            ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{
+                transition: `all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay * 0.2}s`
+            }}
+        >
+            <div className={`aspect-video ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center relative hover:-translate-y-1 transition-transform`}>
+                <div className="text-center">
+                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</div>
+                </div>
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="flex gap-2 mb-4 flex-wrap">
+                    {tags.map((tag, index) => (
+                        <span 
+                            key={index}
+                            className={`inline-block ${index === 0 ? 'bg-[#E31E24]' : 'bg-gray-600'} text-white text-xs px-3 py-1 rounded-full font-semibold`}
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+                <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {title}
+                </h3>
+                <p className={`mb-4 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    {description}
+                </p>
+                <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
+                    View Project →
+                </button>
+            </div>
         </div>
     );
 };
