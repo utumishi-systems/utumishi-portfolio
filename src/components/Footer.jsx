@@ -1,51 +1,126 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { ArrowUp } from 'lucide-react';
 
 const Footer = () => {
-    return (
-        <footer className="bg-slate-50 py-20 px-6 border-t border-slate-100 relative z-10">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid md:grid-cols-4 gap-12 mb-20 text-left">
-                    <div className="col-span-1 md:col-span-2">
-                        <div className="flex items-center gap-3 mb-8">
-                            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs">🚀</div>
-                            <span className="text-xl font-bold tracking-tight text-slate-900">Utumishi Tech</span>
-                        </div>
-                        <p className="text-slate-500 max-w-sm font-medium leading-relaxed">
-                            Leading provider of end-to-end technology services. We drive innovation, streamline operations, and scale businesses globally.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-8">Quick Links</h4>
-                        <ul className="space-y-4 text-slate-500 font-bold">
-                            <li><Link to="/services" className="hover:text-indigo-600 transition-colors">Services</Link></li>
-                            <li><Link to="/portfolio" className="hover:text-indigo-600 transition-colors">Portfolio</Link></li>
-                            <li><Link to="/about" className="hover:text-indigo-600 transition-colors">About</Link></li>
-                            <li><Link to="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-8">Contact</h4>
-                        <ul className="space-y-4 text-slate-500 font-bold">
-                            <li className="flex items-center gap-3">📧 <span className="text-sm">utumishi.systems@yahoo.com</span></li>
-                            <li className="flex items-center gap-3">📍 <span className="text-sm">Nairobi, Kenya</span></li>
-                        </ul>
-                    </div>
-                </div>
+    const [showBackToTop, setShowBackToTop] = useState(false);
+    const [darkMode, setDarkMode] = useState(false);
 
-                <div className="pt-10 border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-slate-400 text-sm font-medium">
-                        © {new Date().getFullYear()} Utumishi Tech Solutions. All rights reserved.
-                    </p>
-                    <div className="flex gap-6 text-slate-400">
-                        <span className="hover:text-indigo-600 cursor-pointer transition-all">FB</span>
-                        <span className="hover:text-indigo-600 cursor-pointer transition-all">IG</span>
-                        <span className="hover:text-indigo-600 cursor-pointer transition-all">LN</span>
-                        <span className="hover:text-indigo-600 cursor-pointer transition-all">GH</span>
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowBackToTop(window.scrollY > 400);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const checkDarkMode = () => {
+            setDarkMode(document.documentElement.classList.contains('dark'));
+        };
+        checkDarkMode();
+        const observer = new MutationObserver(checkDarkMode);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+        return () => observer.disconnect();
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleAnchorClick = (e, hash) => {
+        e.preventDefault();
+        const targetId = hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    return (
+        <>
+            <footer className={`bg-gray-900 text-white py-16 px-6`}>
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-4 gap-8 mb-12">
+                        {/* Company Bio/Logo */}
+                        <div>
+                            <div className="flex items-center gap-2 mb-4">
+                                <img src="/images/utumishi-logo.svg" alt="Utumishi Tech" className="w-8 h-8" />
+                                <h3 className="text-xl font-bold">UTUMISHI TECH</h3>
+                            </div>
+                            <p className="text-gray-400 text-sm leading-relaxed">
+                                A software engineering startup delivering custom technology solutions that drive business growth and innovation.
+                            </p>
+                        </div>
+
+                        {/* Quick Links */}
+                        <div>
+                            <h4 className="font-semibold mb-4">Quick Links</h4>
+                            <ul className="space-y-2 text-sm text-gray-400">
+                                <li><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')} className="hover:text-white transition-colors cursor-pointer">Home</a></li>
+                                <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="hover:text-white transition-colors cursor-pointer">Services</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Products</a></li>
+                                <li><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')} className="hover:text-white transition-colors cursor-pointer">About</a></li>
+                                <li><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')} className="hover:text-white transition-colors cursor-pointer">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        {/* Services List */}
+                        <div>
+                            <h4 className="font-semibold mb-4">Services</h4>
+                            <ul className="space-y-2 text-sm text-gray-400">
+                                <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="hover:text-white transition-colors cursor-pointer">Mobile App Development</a></li>
+                                <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="hover:text-white transition-colors cursor-pointer">Web Development</a></li>
+                                <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="hover:text-white transition-colors cursor-pointer">Business Process Automation</a></li>
+                                <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="hover:text-white transition-colors cursor-pointer">Custom Software Development</a></li>
+                                <li><a href="#services" onClick={(e) => handleAnchorClick(e, '#services')} className="hover:text-white transition-colors cursor-pointer">Digital Transformation</a></li>
+                            </ul>
+                        </div>
+
+                        {/* Products List */}
+                        <div>
+                            <h4 className="font-semibold mb-4">Products</h4>
+                            <ul className="space-y-2 text-sm text-gray-400">
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">aSoft: Overwatch</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Academia</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Business Solutions</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Educational Software</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Mobile Applications</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Bottom Bar */}
+                    <div className={`border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4`}>
+                        <div className="text-sm text-gray-400">
+                            © 2026 Utumishi Tech Solutions. All rights reserved.
+                        </div>
+                        <div className="flex gap-6 text-sm text-gray-400">
+                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                        </div>
+                        <button
+                            onClick={scrollToTop}
+                            className={`${showBackToTop ? 'opacity-100' : 'opacity-0'} bg-[#E31E24] hover:bg-[#C91A20] text-white p-3 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:scale-110`}
+                            aria-label="Back to top"
+                        >
+                            <ArrowUp className="w-5 h-5" />
+                        </button>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </>
     );
 };
 

@@ -1,97 +1,157 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation();
+    const [darkMode, setDarkMode] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
 
     const navLinks = [
-        { name: 'Services', path: '/services' },
-        { name: 'Portfolio', path: '/portfolio' },
-        { name: 'About', path: '/about' },
-        { name: 'Contact', path: '/contact' },
+        { name: 'Home', hash: '#home' },
+        { name: 'Services', hash: '#services' },
+        { name: 'Products', hash: '#products' },
+        { name: 'About', hash: '#about' },
+        { name: 'Contact', hash: '#contact' },
     ];
 
-    const isActive = (path) => location.pathname === path;
+    useEffect(() => {
+        // Sync with Layout's dark mode
+        const checkDarkMode = () => {
+            setDarkMode(document.documentElement.classList.contains('dark'));
+        };
+        checkDarkMode();
+        const observer = new MutationObserver(checkDarkMode);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        // Track active section on scroll
+        const handleScroll = () => {
+            const sections = navLinks.map(link => link.hash.substring(1));
+            const scrollPosition = window.scrollY + 100;
+
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = document.getElementById(sections[i]);
+                if (section && section.offsetTop <= scrollPosition) {
+                    setActiveSection(sections[i]);
+                    break;
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check on mount
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const toggleDarkMode = () => {
+        const currentDarkMode = document.documentElement.classList.contains('dark');
+        if (currentDarkMode) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('darkMode', 'false');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('darkMode', 'true');
+        }
+        setDarkMode(!currentDarkMode);
+    };
+
+    const handleNavClick = (e, hash) => {
+        e.preventDefault();
+        const targetId = hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+        setIsOpen(false);
+    };
 
     return (
-        <nav className="bg-white/70 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-100/50">
-            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-                <Link to="/" className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                        <span className="text-white text-xl">🚀</span>
-                    </div>
-                    <span className="text-xl font-bold tracking-tight text-slate-900">
-                        Utumishi<span className="text-indigo-600">Tech</span>
-                    </span>
-                </Link>
+        <header className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-sm border-b ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}>
+            <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="flex items-center justify-between">
+                    {/* Logo */}
+                    <a 
+                        href="#home" 
+                        onClick={(e) => handleNavClick(e, '#home')}
+                        className="flex items-center gap-2 cursor-pointer"
+                    >
+                        <img src="/images/utumishi-logo.svg" alt="Utumishi Tech" className="w-10 h-10" />
+                        <span className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                            Utumishi
+                        </span>
+                    </a>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-8">
-                    <ul className="flex gap-8 text-[15px] font-semibold text-slate-600">
+                    {/* Centered Navigation */}
+                    <nav className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => (
-                            <li key={link.name}>
-                                <Link
-                                    to={link.path}
-                                    className={`transition-all hover:text-indigo-600 ${isActive(link.path) ? 'text-indigo-600' : ''}`}
+                            <a
+                                key={link.name}
+                                href={link.hash}
+                                onClick={(e) => handleNavClick(e, link.hash)}
+                                className={`text-sm font-medium hover:text-[#E31E24] transition-colors ${activeSection === link.hash.substring(1) ? 'text-[#E31E24]' : darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                    </nav>
+
+                    {/* Right Side: Dark Mode Toggle & Mobile Menu Button */}
+                    <div className="flex items-center gap-4">
+                        <button
+                            onClick={toggleDarkMode}
+                            className={`p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
+                            aria-label="Toggle dark mode"
+                        >
+                            {darkMode ? (
+                                <Sun className="w-5 h-5 text-yellow-400" />
+                            ) : (
+                                <Moon className="w-5 h-5 text-gray-700" />
+                            )}
+                        </button>
+                        
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className={`md:hidden p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-gray-800 text-white' : 'hover:bg-gray-100 text-gray-700'}`}
+                            aria-label="Toggle mobile menu"
+                        >
+                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile Menu */}
+                {isOpen && (
+                    <div className={`md:hidden mt-4 pb-4 border-t ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}>
+                        <nav className="flex flex-col gap-4 pt-4">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.hash}
+                                    onClick={(e) => handleNavClick(e, link.hash)}
+                                    className={`text-base font-medium hover:text-[#E31E24] transition-colors ${activeSection === link.hash.substring(1) ? 'text-[#E31E24]' : darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                                 >
                                     {link.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-
-                    <div className="flex items-center gap-6 ml-4">
-                        <button className="p-2 text-slate-500 hover:text-indigo-600 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
-                        </button>
-                        <Link
-                            to="/contact"
-                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-indigo-100/50 hover:shadow-indigo-200"
-                        >
-                            Get a Quote
-                        </Link>
+                                </a>
+                            ))}
+                        </nav>
                     </div>
-                </div>
-
-                {/* Mobile menu button */}
-                <div className="md:hidden flex items-center gap-4">
-                    <button className="p-2 text-slate-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
-                    </button>
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="text-slate-600"
-                    >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
+                )}
             </div>
-
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-white border-b border-slate-100 py-6 px-6 space-y-4 shadow-xl">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            to={link.path}
-                            onClick={() => setIsOpen(false)}
-                            className={`block text-lg font-semibold ${isActive(link.path) ? 'text-indigo-600' : 'text-slate-600'}`}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                    <Link
-                        to="/contact"
-                        onClick={() => setIsOpen(false)}
-                        className="block w-full py-4 bg-indigo-600 text-white text-center rounded-2xl font-bold shadow-lg"
-                    >
-                        Get a Quote
-                    </Link>
-                </div>
-            )}
-        </nav>
+        </header>
     );
 };
 

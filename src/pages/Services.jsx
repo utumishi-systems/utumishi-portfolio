@@ -45,8 +45,8 @@ const Services = () => {
             <div className="text-center max-w-3xl mx-auto mb-32">
                 <h1 className="text-7xl font-black text-[#0f172a] mb-8 leading-[1]" style={{ letterSpacing: '-0.04em' }}>Our Services</h1>
                 <p className="text-slate-500 text-xl font-medium leading-relaxed">
-                    We provide end-to-end technology services that drive innovation, streamline <br className="hidden md:block" />
-                    operations, and scale businesses across the globe.
+                    We deliver comprehensive software engineering services designed to solve your <br className="hidden md:block" />
+                    unique business challenges and accelerate growth.
                 </p>
             </div>
 
