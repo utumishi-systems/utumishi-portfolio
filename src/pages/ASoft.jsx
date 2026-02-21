@@ -315,52 +315,67 @@ const ASoft = () => {
                             Innovative products designed to address specific business needs
                         </p>
                         <div className="grid md:grid-cols-2 gap-8">
-                            {/* Product Card 1: aSoft Overwatch */}
+                            {/* Product Card 1: Rental Management System */}
                             <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all flex flex-col`}>
-                                <div className={`aspect-video ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center relative`}>
-                                    <div className="text-center">
-                                        <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>aSoft: Overwatch</div>
-                                    </div>
+                                <div className="aspect-video overflow-hidden relative">
+                                    <img 
+                                        src="/images/logistics.jpg" 
+                                        alt="Rental Management System" 
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow">
                                     <div className="flex gap-2 mb-4">
-                                        <span className="inline-block bg-[#E31E24] text-white text-xs px-3 py-1 rounded-full font-semibold">Mobile App</span>
-                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Business</span>
-                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Management</span>
+                                        <span className="inline-block bg-[#E31E24] text-white text-xs px-3 py-1 rounded-full font-semibold">Property Management</span>
+                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Real Estate</span>
+                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">SaaS</span>
                                     </div>
                                     <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                        aSoft: Overwatch
+                                        Rental Management System
                                     </h3>
                                     <p className={`mb-4 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                        A comprehensive mobile application for business monitoring and management, providing real-time insights and control.
+                                        A comprehensive property and rental management solution that streamlines tenant management, lease tracking, and payment processing.
                                     </p>
-                                    <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
+                                    <a 
+                                        href="https://rental.utumishitech.com" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className={`text-[#E31E24] font-semibold hover:underline self-start`}
+                                    >
                                         View Project →
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 
-                            {/* Product Card 2: Academia */}
+                            {/* Product Card 2: Telehealth System */}
                             <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all flex flex-col`}>
-                                <div className={`aspect-video ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center relative`}>
-                                    <div className="text-center">
-                                        <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Academia</div>
-                                    </div>
+                                <div className="aspect-video overflow-hidden relative">
+                                    <img 
+                                        src="/images/telehealth.png" 
+                                        alt="Telehealth System" 
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow">
                                     <div className="flex gap-2 mb-4">
-                                        <span className="inline-block bg-[#E31E24] text-white text-xs px-3 py-1 rounded-full font-semibold">Education</span>
-                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Management System</span>
+                                        <span className="inline-block bg-[#E31E24] text-white text-xs px-3 py-1 rounded-full font-semibold">Healthcare</span>
+                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Telemedicine</span>
+                                        <span className="inline-block bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-semibold">Digital Health</span>
                                     </div>
                                     <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                                        Academia
+                                        Telehealth System
                                     </h3>
                                     <p className={`mb-4 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                        An integrated school management system that streamlines administrative tasks and enhances communication between stakeholders.
+                                        A secure telemedicine platform enabling remote consultations, patient monitoring, and digital health records management.
                                     </p>
-                                    <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
+                                    <a 
+                                        href="https://telehealth.utumishitech.com" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className={`text-[#E31E24] font-semibold hover:underline self-start`}
+                                    >
                                         View Project →
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -576,8 +591,8 @@ const ASoft = () => {
                             <div>
                                 <h4 className="font-semibold mb-4">Products</h4>
                                 <ul className="space-y-2 text-sm text-gray-400">
-                                    <li><a href="#products" className="hover:text-white transition-colors">aSoft: Overwatch</a></li>
-                                    <li><a href="#products" className="hover:text-white transition-colors">Academia</a></li>
+                                    <li><a href="#products" className="hover:text-white transition-colors">Rental Management System</a></li>
+                                    <li><a href="#products" className="hover:text-white transition-colors">Telehealth System</a></li>
                                     <li><a href="#products" className="hover:text-white transition-colors">Business Solutions</a></li>
                                     <li><a href="#products" className="hover:text-white transition-colors">Educational Software</a></li>
                                     <li><a href="#products" className="hover:text-white transition-colors">Mobile Applications</a></li>

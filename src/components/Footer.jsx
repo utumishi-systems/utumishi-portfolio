@@ -88,8 +88,8 @@ const Footer = () => {
                         <div>
                             <h4 className="font-semibold mb-4">Products</h4>
                             <ul className="space-y-2 text-sm text-gray-400">
-                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">aSoft: Overwatch</a></li>
-                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Academia</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Rental Management System</a></li>
+                                <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Telehealth System</a></li>
                                 <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Business Solutions</a></li>
                                 <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Educational Software</a></li>
                                 <li><a href="#products" onClick={(e) => handleAnchorClick(e, '#products')} className="hover:text-white transition-colors cursor-pointer">Mobile Applications</a></li>

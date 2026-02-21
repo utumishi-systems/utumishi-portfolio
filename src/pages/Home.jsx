@@ -60,10 +60,12 @@ const Home = () => {
                         {/* Right: Office Image with Floating Badges */}
                         <div className="relative">
                             <div className={`rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 ${darkMode ? 'bg-gray-800' : 'bg-gray-100'} animate-fade-in-up`}>
-                                {/* Placeholder for office image */}
-                                <div className="aspect-[4/3] bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                                    <span className="text-gray-400 text-sm">Modern Office Setting</span>
-                                </div>
+                                {/* Office image */}
+                                <img 
+                                    src="/images/office.jpg" 
+                                    alt="Modern Office Setting" 
+                                    className="w-full h-full object-cover aspect-[4/3]"
+                                />
                             </div>
                             {/* Floating Badges */}
                             <div className="absolute -top-4 -right-4 bg-white rounded-lg shadow-xl p-4 animate-float hover:scale-110 transition-transform cursor-default">
@@ -156,20 +158,24 @@ const Home = () => {
                         Innovative products designed to address specific business needs
                     </p>
                     <div className="grid md:grid-cols-2 gap-8">
-                        {/* Product Card 1: aSoft Overwatch */}
+                        {/* Product Card 1: Rental Management System */}
                         <ProductCard 
-                            title="aSoft: Overwatch"
-                            description="A comprehensive mobile application for business monitoring and management, providing real-time insights and control."
-                            tags={['Mobile App', 'Business', 'Management']}
+                            title="Rental Management System"
+                            description="A comprehensive property and rental management solution that streamlines tenant management, lease tracking, and payment processing."
+                            tags={['Property Management', 'Real Estate', 'SaaS']}
+                            image="/images/logistics.jpg"
+                            link="https://rental.utumishitech.com"
                             darkMode={darkMode}
                             delay={0.1}
                         />
 
-                        {/* Product Card 2: Academia */}
+                        {/* Product Card 2: Telehealth System */}
                         <ProductCard 
-                            title="Academia"
-                            description="An integrated school management system that streamlines administrative tasks and enhances communication between stakeholders."
-                            tags={['Education', 'Management System']}
+                            title="Telehealth System"
+                            description="A secure telemedicine platform enabling remote consultations, patient monitoring, and digital health records management."
+                            tags={['Healthcare', 'Telemedicine', 'Digital Health']}
+                            image="/images/telehealth.png"
+                            link="https://hbpostdmanagement.web.app/"
                             darkMode={darkMode}
                             delay={0.2}
                         />
@@ -385,7 +391,7 @@ const ServiceCard = ({ icon, title, description, darkMode, delay }) => {
     );
 };
 
-const ProductCard = ({ title, description, tags, darkMode, delay }) => {
+const ProductCard = ({ title, description, tags, darkMode, delay, image, link }) => {
     const { ref, isVisible } = useScrollReveal();
 
     return (
@@ -397,10 +403,12 @@ const ProductCard = ({ title, description, tags, darkMode, delay }) => {
                 transition: `all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay * 0.2}s`
             }}
         >
-            <div className={`aspect-video ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-br from-gray-100 to-gray-200'} flex items-center justify-center relative hover:-translate-y-1 transition-transform`}>
-                <div className="text-center">
-                    <div className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</div>
-                </div>
+            <div className="aspect-video overflow-hidden relative hover:-translate-y-1 transition-transform">
+                <img 
+                    src={image} 
+                    alt={title} 
+                    className="w-full h-full object-cover"
+                />
             </div>
             <div className="p-6 flex flex-col flex-grow">
                 <div className="flex gap-2 mb-4 flex-wrap">
@@ -419,9 +427,14 @@ const ProductCard = ({ title, description, tags, darkMode, delay }) => {
                 <p className={`mb-4 flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     {description}
                 </p>
-                <button className={`text-[#E31E24] font-semibold hover:underline self-start`}>
+                <a 
+                    href={link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={`text-[#E31E24] font-semibold hover:underline self-start`}
+                >
                     View Project →
-                </button>
+                </a>
             </div>
         </div>
     );
